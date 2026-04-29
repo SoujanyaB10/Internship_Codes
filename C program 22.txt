@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // -------- POINTER ARITHMETIC --------
+    int arr[] = {10, 20, 30, 40, 50};
+    int *ptr = arr;  // points to first element
+
+    printf("Pointer Arithmetic:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("Value: %d, Address: %p\n", *(ptr + i), (ptr + i));
+    }
+
+    // Increment pointer
+    ptr++;
+    printf("\nAfter increment, ptr points to: %d\n", *ptr);
+
+    // Decrement pointer
+    ptr--;
+    printf("After decrement, ptr points back to: %d\n", *ptr);
+
+
+    // -------- DYNAMIC MEMORY ALLOCATION --------
+    int n;
+    printf("\nEnter number of elements: ");
+    scanf("%d", &n);
+
+    int *dynArr;
+
+    // Allocate memory dynamically
+    dynArr = (int *)malloc(n * sizeof(int));
+
+    if (dynArr == NULL) {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+
+    // Input values
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &dynArr[i]);
+    }
+
+    // Display values
+    printf("Dynamic Array Elements:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", dynArr[i]);
+    }
+
+    // Free allocated memory
+    free(dynArr);
+
+    printf("\nMemory successfully freed\n");
+
+    return 0;
+}
