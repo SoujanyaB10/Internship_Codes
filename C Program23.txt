@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define node structure
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to insert at beginning
+struct Node* insertAtBeginning(struct Node* head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = head;
+    return newNode;
+}
+
+// Function to insert at end
+struct Node* insertAtEnd(struct Node* head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (head == NULL)
+        return newNode;
+
+    struct Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
+    return head;
+}
+
+// Function to delete a node
+struct Node* deleteNode(struct Node* head, int value) {
+    struct Node *temp = head, *prev = NULL;
+
+    if (temp != NULL && temp->data == value) {
+        head = temp->next;
+        free(temp);
+        return head;
+    }
+
+    while (temp != NULL && temp->data != value) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL)
+        return head;
+
+    prev->next = temp->next;
+    free(temp);
+    return head;
+}
+
+// Function to traverse (display)
+void display(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+// Main function
+int main() {
+    struct Node* head = NULL;
+
+    // Insertion
+    head = insertAtBeginning(head, 10);
+    head = insertAtEnd(head, 20);
+    head = insertAtEnd(head, 30);
+
+    printf("Linked List: ");
+    display(head);
+
+    // Deletion
+    head = deleteNode(head, 20);
+    printf("After Deletion: ");
+    display(head);
+
+    return 0;
+}
