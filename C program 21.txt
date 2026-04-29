@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    int a = 10;        // normal variable
+    int *ptr;          // pointer declaration
+
+    ptr = &a;          // pointer stores address of 'a'
+
+    // Display values and addresses
+    printf("Value of a: %d\n", a);
+    printf("Address of a: %p\n", &a);
+
+    printf("Pointer ptr stores address: %p\n", ptr);
+    printf("Value at that address (*ptr): %d\n", *ptr);
+
+    // Modifying value using pointer
+    *ptr = 20;
+    printf("Updated value of a using pointer: %d\n", a);
+
+    // -------- Pointer with Array --------
+    int arr[3] = {1, 2, 3};
+    int *p = arr;  // points to first element
+
+    printf("\nArray using pointer:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Value: %d, Address: %p\n", *(p + i), (p + i));
+    }
+
+    return 0;
+}
