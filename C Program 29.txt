@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 5
+
+int graph[MAX][MAX];   // adjacency matrix
+int visited[MAX];      // visited array
+
+// -------- BFS --------
+void BFS(int start) {
+    int queue[MAX], front = 0, rear = 0;
+
+    for (int i = 0; i < MAX; i++)
+        visited[i] = 0;
+
+    visited[start] = 1;
+    queue[rear++] = start;
+
+    printf("BFS Traversal: ");
+
+    while (front < rear) {
+        int current = queue[front++];
+        printf("%d ", current);
+
+        for (int i = 0; i < MAX; i++) {
+            if (graph[current][i] == 1 && !visited[i]) {
+                visited[i] = 1;
+                queue[rear++] = i;
+            }
+        }
+    }
+}
+
+// -------- DFS --------
+void DFS(int node) {
+    visited[node] = 1;
+    printf("%d ", node);
+
+    for (int i = 0; i < MAX; i++) {
+        if (graph[node][i] == 1 && !visited[i]) {
+            DFS(i);
+        }
+    }
+}
+
+// -------- MAIN FUNCTION --------
+int main() {
+    // Initialize graph (example)
+    int temp[MAX][MAX] = {
+        {0, 1, 1, 0, 0},
+        {1, 0, 0, 1, 1},
+        {1, 0, 0, 0, 1},
+        {0, 1, 0, 0, 0},
+        {0, 1, 1, 0, 0}
+    };
+
+    // Copy to graph
+    for (int i = 0; i < MAX; i++)
+        for (int j = 0; j < MAX; j++)
+            graph[i][j] = temp[i][j];
+
+    // BFS
+    BFS(0);
+
+    printf("\nDFS Traversal: ");
+
+    // Reset visited for DFS
+    for (int i = 0; i < MAX; i++)
+        visited[i] = 0;
+
+    DFS(0);
+
+    return 0;
+}
