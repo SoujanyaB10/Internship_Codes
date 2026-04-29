@@ -1,0 +1,74 @@
+#include <stdio.h>
+
+// -------- DISPLAY ARRAY --------
+void display(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+// -------- INSERT ELEMENT --------
+int insert(int arr[], int n, int pos, int value) {
+    for (int i = n; i > pos; i--) {
+        arr[i] = arr[i - 1]; // shift right
+    }
+    arr[pos] = value;
+    return n + 1;
+}
+
+// -------- DELETE ELEMENT --------
+int delete(int arr[], int n, int pos) {
+    for (int i = pos; i < n - 1; i++) {
+        arr[i] = arr[i + 1]; // shift left
+    }
+    return n - 1;
+}
+
+// -------- FIND MAX ELEMENT --------
+int findMax(int arr[], int n) {
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max)
+            max = arr[i];
+    }
+    return max;
+}
+
+// -------- MAIN FUNCTION --------
+int main() {
+    int arr[10] = {10, 20, 30, 40, 50};
+    int n = 5;
+
+    printf("Original Array: ");
+    display(arr, n);
+
+    // Insertion
+    n = insert(arr, n, 2, 25);
+    printf("After Insertion: ");
+    display(arr, n);
+
+    // Deletion
+    n = delete(arr, n, 3);
+    printf("After Deletion: ");
+    display(arr, n);
+
+    // Find Maximum
+    int max = findMax(arr, n);
+    printf("Maximum Element: %d\n", max);
+
+    // -------- 2D ARRAY (Matrix) --------
+    int matrix[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+
+    printf("2D Array (Matrix):\n");
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
